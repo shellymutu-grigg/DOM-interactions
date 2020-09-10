@@ -3,12 +3,11 @@
 // https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded
 document.addEventListener('DOMContentLoaded', start)
 
+
 function start () {
   bindEventListeners(document.getElementsByClassName('board')[0].children)
 }
-document.addEventListener('contextmenu', function(e) {
-  e.preventDefault()
-})
+
 
 function bindEventListeners (dots) {
   for (var i = 0; i < dots.length; i++) {
@@ -70,17 +69,10 @@ function updateCounts () {
   }
 
   // WRITE CODE HERE TO COUNT BLUE, GREEN, AND INVISIBLE DOTS
+  totals.blue = document.getElementsByClassName('blue').length
+  totals.green = document.getElementsByClassName('green').length
+  totals.invisible = document.getElementsByClassName('invisible').length
 
-
-  for(var i =0; i < document.getElementsByClassName('board')[0].children.length; i++){
-    if(document.getElementsByClassName('board')[0].children[i].classList[1]==='blue'){
-      totals['blue'] = totals['blue'] + 1
-    }else if(document.getElementsByClassName('board')[0].children[i].classList[1] === 'green'){
-      totals['green'] = totals['green']+ 1
-    }else if(document.getElementsByClassName('board')[0].children[i].classList[1] === 'invisible'){
-      totals['invisible'] = totals['invisible']+1
-    }
-  }
   // Once you've done the counting, this function will update the display
   displayTotals(totals)
 }
