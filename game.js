@@ -8,10 +8,10 @@ function start () {
   bindEventListeners(document.getElementsByClassName('board')[0].children)
 }
 
-
 function bindEventListeners (dots) {
   for (var i = 0; i < dots.length; i++) {
     // BIND YOUR EVENT LISTENERS HERE
+
     // The first one is provided for you
     dots[i].addEventListener('contextmenu', makeGreen)
 
@@ -22,7 +22,7 @@ function bindEventListeners (dots) {
     dots[i].addEventListener('dblclick', hide)
   }
 }
-    // SMG 09/09/2020: clear other states from classList array if greater than 1
+ // SMG 09/09/2020: clear other states from classList array if greater than 1
 function clearClassList(evt){
   if(evt.target.classList[1] === 'blue'){
     evt.target.classList.toggle('blue')
@@ -33,6 +33,7 @@ function clearClassList(evt){
     evt.target.classList.toggle('invisible')
   }
 }
+    
 
 function makeGreen (evt) {
   evt.preventDefault()
@@ -61,6 +62,7 @@ function hide (evt) {
     evt.target.classList.toggle('invisible')
     updateCounts()
 }
+
 function updateCounts () {
   var totals = {
     blue: 0,
@@ -82,3 +84,4 @@ function displayTotals (totals) {
     document.getElementById(key + '-total').innerHTML = totals[key]
   }
 }
+
