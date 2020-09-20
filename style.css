@@ -4,11 +4,17 @@ html, body {
 
 body {
   display: flex;
+  flex-flow: column;
   align-items: center;
   justify-content: center;
+  align-content: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   
 }
-
+.container{
+  display: flex;
+  vertical-align: middle;
+}
 .board {
   width: 375px;
   height: 375px;
@@ -32,6 +38,7 @@ body {
 .totals {
   font-size: 5em;
   font-family: 'sans-serif';
+  margin-top: 50px;
   margin-left: 50px;
 }
 
