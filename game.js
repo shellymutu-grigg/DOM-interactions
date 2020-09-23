@@ -3,64 +3,61 @@
 // https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded
 document.addEventListener('DOMContentLoaded', start)
 
-
 function start () {
+  console.log("start()")
   bindEventListeners(document.getElementsByClassName('board')[0].children)
-}
 
+}
+var triggered = Date.now()
 function bindEventListeners (dots) {
   for (var i = 0; i < dots.length; i++) {
     // BIND YOUR EVENT LISTENERS HERE
-
+    
     // The first one is provided for you
     dots[i].addEventListener('contextmenu', makeGreen)
 
     // SMG 09/09/2020: makeBlue Event Listener
     dots[i].addEventListener('click', makeBlue)
-
+      
     // SMG 09/09/2020: hide Event Listener
     dots[i].addEventListener('dblclick', hide)
   }
 }
- // SMG 09/09/2020: clear other states from classList array if greater than 1
-function clearClassList(evt){
-  if(evt.target.classList[1] === 'blue'){
-    evt.target.classList.toggle('blue')
-  }else if(evt.target.classList[1] === 'green'){
-    evt.target.classList.toggle('green')
-  }
-  else if(evt.target.classList[1] = 'invisible'){
-    evt.target.classList.toggle('invisible')
-  }
-}
-    
 
 function makeGreen (evt) {
   evt.preventDefault()
-  if(evt.target.classList.length > 1&& evt.target.classList[1] !== 'green'){
-    clearClassList(evt)
-  }
+  evt.target.classList.remove("blue")
+  evt.target.classList.remove("invisible")
   evt.target.classList.toggle('green')
   updateCounts()
 }
 
+function sleep(ms) {
+  return new Promise(
+    resolve => setTimeout(resolve, ms)
+  )
+}
 // CREATE FUNCTION makeBlue HERE
 
-function makeBlue (evt) {
-  if(evt.target.classList.length > 1 && evt.target.classList[1] !== 'blue'){
-    clearClassList(evt)
-  }
-    evt.target.classList.toggle('blue')
+async function makeBlue (evt) {
+  await sleep(200)
+  var currentTime = Date.now() 
+  if(currentTime-triggered > 500){
+    console.log("currentTime-triggered > 500 is true therefore not a dblclick event")
+    evt.target.classList.remove("invisible")
+    evt.target.classList.remove("green")
+    evt.target.classList.toggle("blue")
     updateCounts()
+  } 
 }
 // CREATE FUNCTION hide HERE
 
-function hide (evt) {
-  if(evt.target.classList.length > 1&& evt.target.classList[1] !== 'invisble'){
-    clearClassList(evt)
-  }
-    evt.target.classList.toggle('invisible')
-    updateCounts()
+async function hide (evt) {
+  triggered = Date.now()
+  evt.target.classList.remove("blue")
+  evt.target.classList.remove("green")
+  evt.target.classList.toggle('invisible')
+  updateCounts()
 }
 
 function updateCounts () {
