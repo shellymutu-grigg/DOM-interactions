@@ -43,7 +43,7 @@ async function makeBlue (evt) {
   await sleep(200)
   var currentTime = Date.now() 
   if(currentTime-triggered > 500){
-    console.log("currentTime-triggered > 500 is true therefore not a dblclick event")
+    //This means that the time between the last hide event that set a new triggered value and the makeBlue call is greater than 500 milliseconds therefore cannot be part of a dblclcik event 
     evt.target.classList.remove("invisible")
     evt.target.classList.remove("green")
     evt.target.classList.toggle("blue")
@@ -52,7 +52,7 @@ async function makeBlue (evt) {
 }
 // CREATE FUNCTION hide HERE
 
-async function hide (evt) {
+function hide (evt) {
   triggered = Date.now()
   evt.target.classList.remove("blue")
   evt.target.classList.remove("green")
